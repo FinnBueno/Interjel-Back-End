@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version = "2.1" xmlns = "http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation = "http://xmlns.jcp.org/xml/ns/persistence
+        http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+    <persistence-unit name = "interjel">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>nl.interjel.management.model.entity.Member</class>
+        <class>nl.interjel.management.model.entity.Season</class>
+        <class>nl.interjel.management.model.entity.SeasonPayment</class>
+        <class>nl.interjel.management.model.view.MemberFull</class>
+        <class>nl.interjel.management.model.entity.Account</class>
+        <class>nl.interjel.management.model.entity.Instance</class>
+        <class>nl.interjel.management.model.relationship.MemberVisit</class>
+        <properties>
+            <property name = "javax.persistence.jdbc.driver" value = "com.mysql.cj.jdbc.Driver"/>
+            <property name = "hibernate.show_sql" value = "true"/> <!-- Debugging purposes -->
+            <property name = "hibernate.format_sql" value = "true"/> <!-- Debugging purposes -->
+            <property name = "hibernate.connection.driver_class" value = "com.mysql.jdbc.Driver"/>
+        </properties>
+    </persistence-unit>
+</persistence>

@@ -1,0 +1,6 @@
+target/
+*.iml
+database-credentials.json
+.idea/
+
+.DS_STORE
