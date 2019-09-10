@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class DatabaseCredentialsFetcher {
 
 	private DatabaseCredentialsFetcherStrategy strategies[] = new DatabaseCredentialsFetcherStrategy[] {
+		new HerokuUrlFetcher(),
 		new DatabaseCredentialsFromEnvironment(),
 		new DatabaseCredentialsFromJson(),
 	};
