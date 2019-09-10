@@ -1,6 +1,5 @@
 package nl.interjel.management;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -15,8 +14,6 @@ public class ManagementConfiguration extends Configuration {
     private int paginationDefault = 20;
 
     private int paginationMax = 40;
-
-    private String databaseFile;
 
     public byte[] getJwtTokenSecret() {
         return jwtTokenSecret.getBytes();
@@ -42,11 +39,4 @@ public class ManagementConfiguration extends Configuration {
         this.paginationMax = paginationMax;
     }
 
-    public String getDatabaseFile() {
-        return databaseFile;
-    }
-
-    public void setDatabaseFile(String databaseFile) {
-        this.databaseFile = databaseFile;
-    }
 }
