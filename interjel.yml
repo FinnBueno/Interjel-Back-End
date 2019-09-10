@@ -5,4 +5,4 @@ server:
   rootPath: '/interjel/*'
   applicationConnectors:
   - type: http
-    port: 9000
+    port: 8080
