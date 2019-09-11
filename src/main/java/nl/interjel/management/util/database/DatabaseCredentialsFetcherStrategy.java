@@ -8,8 +8,13 @@ public abstract class DatabaseCredentialsFetcherStrategy {
 	private String password;
 	private String username;
 	private String url;
+	private String schema;
 
 	public abstract boolean fetch();
+
+	public String getSchema() { return schema; }
+
+	public void setSchema(String schema) { this.schema = schema; }
 
 	public String getPassword() {
 		return password;

@@ -22,6 +22,8 @@ public class HerokuUrlFetcher extends DatabaseCredentialsFetcherStrategy {
 			setUsername(username);
 			setPassword(password);
 			setURL(dbUrl);
+			System.out.println(dbUri.getScheme());
+			setSchema(dbUri.getScheme());
 			return true;
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
