@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  * @author Finn Bon
  */
 @Entity
-@Table(name = "instance", schema = "interjel")
+@Table(name = "instance")
 public class Instance implements OnSelect {
 
     @SkipAutoGeneration

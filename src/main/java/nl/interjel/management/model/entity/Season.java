@@ -11,7 +11,7 @@ import java.util.Objects;
  * @author Finn Bon
  */
 @Entity
-@Table(name = "season", schema = "interjel")
+@Table(name = "season")
 public class Season {
 
     private LocalDate startDate;

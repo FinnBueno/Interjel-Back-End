@@ -13,7 +13,7 @@ import java.util.Objects;
  * Most fields in here are transient to prevent JSON loops
  */
 @Entity
-@Table(name = "member_visit", schema = "interjel")
+@Table(name = "member_visit")
 public class MemberVisit {
 
     private MemberVisitPK id;

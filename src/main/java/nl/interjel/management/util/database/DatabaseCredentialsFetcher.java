@@ -29,8 +29,8 @@ public class DatabaseCredentialsFetcher {
 				.set("javax.persistence.jdbc.url", strategy.getDatabase())
 				.set("hibernate.connection.url", strategy.getDatabase())
 				.set("hibernate.default_schema", strategy.getSchema() != null ? strategy.getSchema() : "interjel")
-				.set("hibernate.show_sql", true)
-				.set("hibernate.format_sql", true)
+				.set("hibernate.show_sql", false)
+				.set("hibernate.format_sql", false)
 				.build(String.class);
 		}
 		HashMap<String, String> databaseCredentials = new HashMap<>();

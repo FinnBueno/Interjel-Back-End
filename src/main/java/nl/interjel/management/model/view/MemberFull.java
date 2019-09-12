@@ -8,9 +8,9 @@ import java.util.Objects;
  * @author Finn Bon
  */
 @Entity
-@Table(name = "member_full", schema = "interjel")
+@Table(name = "member_full")
 public class MemberFull {
-    
+
     private Integer memberId;
     private String firstname;
     private String lastname;

@@ -12,7 +12,7 @@ import java.util.Objects;
  * @author Finn Bon
  */
 @Entity
-@Table(name = "member", schema = "interjel")
+@Table(name = "member")
 public class Member {
 
     @SkipAutoGeneration

@@ -11,7 +11,7 @@ import java.util.Objects;
  * @author Finn Bon
  */
 @Entity
-@Table(name = "season_payment", schema = "interjel")
+@Table(name = "season_payment")
 public class SeasonPayment implements Serializable {
 
     private SeasonPaymentPK id;

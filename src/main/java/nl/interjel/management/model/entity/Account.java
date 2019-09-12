@@ -13,7 +13,7 @@ import java.util.Objects;
  * @author Finn Bon
  */
 @Entity
-@Table(name = "account", schema = "interjel")
+@Table(name = "account")
 public class Account {
 
     private int accountId;
@@ -39,7 +39,7 @@ public class Account {
     public void setAccountId(int accountId) {
         this.accountId = accountId;
     }
-    
+
     @Column(name = "email")
     public String getEmail() {
         return email;
@@ -48,7 +48,7 @@ public class Account {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
     @Column(name = "password")
     public String getPassword() {
         return password;
