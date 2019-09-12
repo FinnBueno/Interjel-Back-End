@@ -144,6 +144,9 @@ public class Member {
         this.archived = archived;
     }
 
+    @Transient
+    public boolean isActive() { return !isArchived(); }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

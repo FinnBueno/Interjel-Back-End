@@ -35,7 +35,7 @@ public class Instance implements OnSelect {
 
     @Transient
     public Set<Member> getVisitorsAsMembers() {
-        return visitors.stream().map(MemberVisit::getMember).filter(Member::isArchived).collect(Collectors.toSet());
+        return getVisitors().stream().map(MemberVisit::getMember).filter(Member::isActive).collect(Collectors.toSet());
     }
 
     // MySQL columns
