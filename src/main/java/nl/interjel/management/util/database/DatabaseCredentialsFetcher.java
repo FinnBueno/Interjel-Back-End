@@ -22,13 +22,14 @@ public class DatabaseCredentialsFetcher {
 			if (!strategy.fetch()) {
 				continue;
 			}
+			System.out.println(strategy.getSchema());
 			return AnonymousObject
 				.createRoot()
 				.set("javax.persistence.jdbc.user", strategy.getUsername())
 				.set("javax.persistence.jdbc.password", strategy.getPassword())
 				.set("javax.persistence.jdbc.url", strategy.getDatabase())
 				.set("hibernate.connection.url", strategy.getDatabase())
-				.set("hibernate.default_schema", strategy.getSchema() != null ? strategy.getSchema() : "interjel")
+//				.set("hibernate.default_schema", strategy.getSchema() != null ? strategy.getSchema() : "interjel")
 				.set("hibernate.show_sql", false)
 				.set("hibernate.format_sql", false)
 				.build(String.class);
