@@ -3,7 +3,9 @@ package nl.interjel.management.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import io.dropwizard.auth.Auth;
 import nl.interjel.management.auth.BCrypt;
+import nl.interjel.management.auth.User;
 import nl.interjel.management.model.anonymous.AnonymousObject;
 import nl.interjel.management.model.entity.Account;
 import nl.interjel.management.util.EntityManagerWrapper;
@@ -12,12 +14,14 @@ import org.jose4j.jwt.JwtClaims;
 import org.jose4j.lang.JoseException;
 
 import javax.persistence.TypedQuery;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.jose4j.jws.AlgorithmIdentifiers.HMAC_SHA256;
 
@@ -34,8 +38,15 @@ public class AuthResource extends RestResource {
 
     @POST
     @Timed
-    public Response generateValidToken(String body) {
+    public Response generateValidToken(String body, @Context HttpHeaders headers) {
         return transaction(em -> {
+            Map<String, Cookie> cookies = headers.getCookies();
+            String str = cookies.entrySet()
+                .stream()
+                .map(e -> e.getKey() + " = " + e.getValue().getValue())
+                .collect(Collectors.joining("<br/>"));
+            System.out.println(str);
+
             JsonObject json = parseBody(body);
 
             JsonElement email = json.get("email");
@@ -61,7 +72,7 @@ public class AuthResource extends RestResource {
             JwtClaims claims = new JwtClaims();
             claims.setClaim("root", account.isRoot());
             claims.setClaim("email", account.getEmail());
-            claims.setExpirationTimeMinutesInTheFuture(60 * 6);
+//            claims.setExpirationTimeMinutesInTheFuture(60 * 24);
             claims.setIssuedAtToNow();
 
             JsonWebSignature signature = new JsonWebSignature();
@@ -70,17 +81,34 @@ public class AuthResource extends RestResource {
             signature.setKey(getKey());
 
             try {
-                return ok(
-                        AnonymousObject
-                                .createRoot()
-                                .set("token", signature.getCompactSerialization())
-                                .set("root", account.isRoot())
-                                .build()
-                );
+                String token = signature.getCompactSerialization();
+
+                return Response.ok(
+                    AnonymousObject
+                        .createRoot()
+                        .set("token", token)
+                        .build()
+                ).cookie(new NewCookie("Interjel-Token", token)).build();
             } catch (JoseException e) {
                 return serverError("Something went wrong while generating the token.");
             }
         });
     }
 
+    @GET
+    public Response getCurrentUser(
+        @Auth() User user,
+        @Context() HttpHeaders headers
+    ) {
+        System.out.println("Headers");
+        for (Map.Entry<String, List<String>> stringListEntry : headers.getRequestHeaders().entrySet()) {
+            if (!stringListEntry.getKey().equalsIgnoreCase("authorization")) continue;
+            System.out.println("Key: " + stringListEntry.getKey());
+            for (String s : stringListEntry.getValue()) {
+                System.out.println(" - " + s);
+            }
+        }
+        // TODO: Pass along root perm of user
+        return ok(AnonymousObject.createRoot().set("user", true).build());
+    }
 }

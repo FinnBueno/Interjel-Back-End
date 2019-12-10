@@ -18,12 +18,15 @@ public class JwtAuthenticator implements Authenticator<JwtContext, User> {
     public Optional<User> authenticate(JwtContext jwtContext) {
         try {
 
-            if (jwtContext.getJwtClaims().getExpirationTime().isBefore(NumericDate.now())) {
+            if (jwtContext.getJwtClaims().getExpirationTime() != null
+                && jwtContext.getJwtClaims().getExpirationTime().isBefore(NumericDate.now())
+            ) {
                 throw new GeneralJwtException("Token expired");
             }
 
             Object isRoot = jwtContext.getJwtClaims().getClaimValue("root");
             String email = jwtContext.getJwtClaims().getStringClaimValue("email");
+            // TODO: Look up in database instead?
 
             return Optional.of(new User(isRoot instanceof Boolean && ((boolean) isRoot), email));
 

@@ -13,10 +13,10 @@
         <class>nl.interjel.management.model.entity.Instance</class>
         <class>nl.interjel.management.model.relationship.MemberVisit</class>
         <properties>
-            <property name = "javax.persistence.jdbc.driver" value = "org.postgresql.Driver"/>
+            <property name = "javax.persistence.jdbc.driver" value = "com.mysql.jdbc.Driver"/>
             <property name = "hibernate.show_sql" value = "false"/> <!-- Debugging purposes -->
             <property name = "hibernate.format_sql" value = "false"/> <!-- Debugging purposes -->
-            <property name = "hibernate.connection.driver_class" value = "org.postgresql.Driver"/>
+            <property name = "hibernate.connection.driver_class" value = "com.mysql.jdbc.Driver"/>
         </properties>
     </persistence-unit>
 </persistence>

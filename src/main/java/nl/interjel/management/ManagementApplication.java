@@ -92,7 +92,6 @@ public class ManagementApplication extends Application<ManagementConfiguration> 
     private void registerAuthentication(JerseyEnvironment jersey, byte[] key) {
         JwtConsumer consumer = new JwtConsumerBuilder()
                 .setAllowedClockSkewInSeconds(30)
-                .setRequireExpirationTime()
                 .setVerificationKey(new HmacKey(key))
                 .setRelaxVerificationKeyValidation()
                 .build();

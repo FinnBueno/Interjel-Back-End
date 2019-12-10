@@ -2,7 +2,7 @@ jwtTokenSecret: "Hit or miss? I guess they never miss, huh? You got a boyfriend 
 paginationDefault: 20
 paginationMax: 40
 server:
-  rootPath: '/interjel/*'
+  rootPath: '/api/*'
   applicationConnectors:
   - type: http
-    port: ${PORT}
+    port: 9000
